@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+<!--	<template id="assets_backend" name="vat invoice assets" inherit_id="web.assets_backend">
+		<xpath expr="." position="inside">
+			   <link rel="stylesheet" href="/saudi_vat_invoice/static/src/css/style.css"/>
+		</xpath>
+	</template>-->
+	
+	<report 
+			id="action_report_saudi_vat_invoice"
+			string="VAT Invoice"
+			model="account.move"
+			report_type="qweb-pdf"
+			file="saudi_vat_invoice.report_vat_invoice"
+			name="saudi_vat_invoice.report_vat_invoice"
+			print_report_name="'VAT Invoice -%s' %(object.partner_id.name)"/>
+	
+	</data>
+</odoo>

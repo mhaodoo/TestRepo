@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<template id="external_layout_saudi">
+		<t t-if="o and 'company_id' in o">
+        <t t-set="company" t-value="o.company_id"/>
+    	</t>
+    	<t t-if="not o or not 'company_id' in o">
+        <t t-set="company" t-value="res_company"/>
+    	</t>
+		<div class="header">
+        	<table style="border:1pt solid grey;width:100%;padding:15pt;font-family:'A_Nefel_Sereke';border-bottom:0pt solid grey;" class="table-condensed">
+           		<tr>
+           			<td style="padding:10pt; text-align:left;color:#696969;width:32.5%;">
+           				<span t-field="company.name"/><br/>
+           				<span t-if="company.street" t-field="company.street"><br/></span><br/>
+           				<span t-if="company.street2" t-field="company.street2"><br/></span><br/>
+           				<span t-if="company.city" t-field="company.city"></span>
+           				<span t-if="company.state_id" t-field="company.state_id"></span>
+       					<span t-if="company.zip" t-field="company.zip"></span><br/>
+           				<span t-if="company.country_id" t-field="company.country_id"><br/></span>
+           			</td>
+           			<td style="text-align:center;vertical-align:middle;width:35%;">
+           				<span>
+                    		<img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)" style="max-height: 60px;align:left"/>
+                		</span>
+           			</td>
+           			<td style="padding:10pt; text-align:right;width:32.5%;color:#696969;" class="arabic" >
+           				<span t-if="company.name_arabic" t-field="company.name_arabic"><br/></span><br/>
+           				<span t-if="company.street_arabic" t-field="company.street_arabic"><br/></span><br/>
+           				<span t-if="company.street2_arabic" t-field="company.street2_arabic"><br/></span><br/>
+           				<span t-if="company.city_arabic" t-field="company.city_arabic"></span>
+           				<span t-if="company.state_arabic" t-field="company.state_arabic"></span>
+						<span t-if="company.zip_arabic" t-field="company.zip_arabic"></span><br/>
+           				<span t-if="company.country_arabic" t-field="company.country_arabic"><br/></span>
+
+           			</td>
+           		</tr>
+			</table>
+				<table style="border:1pt solid grey;width:100%;padding:15pt;font-family:'A_Nefel_Sereke';border-top:0pt solid grey;" class="table-condensed">
+           		<tr>
+           			<td style="width:10%;padding-left:10pt;text-align:left;color:#696969;">
+           				<div t-if="company.company_registry">
+           					CR No :
+           				</div>
+           			</td>
+           			<td style="width:20%;color:#696969;">
+           				<div t-if="company.company_registry">
+           					<span t-field="company.company_registry"/>
+           				</div>
+           			</td>
+           			<td style="width:20%;padding-right:10pt;color:#696969;text-align:right">
+           				<div t-if="company.company_registry" class="arabic">
+           					:  رقم سجل الشركة
+           				</div>
+           			</td>
+
+           			<td style="width:13%;color:#696969;">
+           				<div t-if="company.partner_id.vat">
+           					<span t-field="company.tin_label"/>:
+           				</div>
+           			</td>
+           			<td style="width:17%;color:#696969;">
+           				<div t-if="company.partner_id.vat">
+           					<span t-field="company.partner_id.vat"/>
+           				</div>
+           			</td>
+           			<td style="width:16;text-align:right;padding-right:10pt;color:#696969;">
+           				<div t-if="company.partner_id.vat" class="arabic">
+           					: الرقم الضريبي
+           				</div>
+           			</td>
+           		</tr>
+           </table>
+        </div>
+
+        <div class="article o_report_layout_standard">
+            <t t-raw="0" />
+        </div>
+
+        <div class="footer">
+            <div class="text-center" style="border-top: 1px solid grey;color:#696969;">
+                <ul class="list-inline mb4">
+                    <li t-if="company.phone">Phone: <span t-field="company.phone"/></li>
+                    <li t-if="company.email">Email: <span t-field="company.email"/></li>
+                    <li t-if="company.website">Web: <span t-field="company.website"/></li>
+                    <li t-if="company.vat"><t t-esc="company.country_id.vat_label or 'TIN'"/>: <span t-field="company.vat"/></li>
+                </ul>
+                <div name="financial_infos">
+                    <span t-field="company.report_footer"/>
+                </div>
+
+                <div class="text-muted">
+                    Page: <span class="page"/> / <span class="topage"/>
+                </div>
+            </div>
+        </div>
+	</template>
+</odoo>
